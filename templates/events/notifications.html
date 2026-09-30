@@ -1,0 +1,161 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications - CampusEvents</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        CampusEvents
+    </div>
+
+    <nav class="menu">
+
+        <a href="{% url 'dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'events' %}">
+            Events
+        </a>
+
+        <a href="{% url 'add_event' %}">
+            Add Event
+        </a>
+
+        <a href="{% url 'participants' %}">
+            Participants
+        </a>
+
+        <a href="{% url 'analytics' %}">
+            Analytics
+        </a>
+
+        <a class="active" href="{% url 'notifications' %}">
+            Notifications
+        </a>
+
+        <a href="#">
+            Settings
+        </a>
+
+    </nav>
+
+    <div class="logout">
+        Logout
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div>
+            <h1>Notifications</h1>
+            <p>View important updates about college events.</p>
+        </div>
+
+        <a class="primary-button" href="{% url 'events' %}">
+            View Events
+        </a>
+
+    </header>
+
+
+    <section class="events-section">
+
+        <div class="section-header">
+            <h2>Recent Notifications</h2>
+        </div>
+
+
+        <div class="event">
+
+            <div class="event-date">
+                <strong>1</strong>
+                <span>INFO</span>
+            </div>
+
+            <div class="event-info">
+
+                <h3>New Event Available</h3>
+
+                <p>
+                    AI Workshop is available for student registration.
+                </p>
+
+            </div>
+
+            <span class="status">
+                New
+            </span>
+
+        </div>
+
+
+        <div class="event">
+
+            <div class="event-date">
+                <strong>2</strong>
+                <span>INFO</span>
+            </div>
+
+            <div class="event-info">
+
+                <h3>Tech Expo 2026</h3>
+
+                <p>
+                    Tech Expo 2026 is scheduled for 20 Oct 2026.
+                </p>
+
+            </div>
+
+            <span class="status">
+                Upcoming
+            </span>
+
+        </div>
+
+
+        <div class="event">
+
+            <div class="event-date">
+                <strong>3</strong>
+                <span>INFO</span>
+            </div>
+
+            <div class="event-info">
+
+                <h3>Registration Update</h3>
+
+                <p>
+                    Students can register for available college events.
+                </p>
+
+            </div>
+
+            <span class="status">
+                Active
+            </span>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

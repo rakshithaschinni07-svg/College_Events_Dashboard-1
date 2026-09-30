@@ -1,0 +1,158 @@
+```html
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Participants - CampusEvents</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        🎓 CampusEvents
+    </div>
+
+    <nav class="menu">
+
+        <a href="{% url 'dashboard' %}">
+            🏠 Dashboard
+        </a>
+
+        <a href="{% url 'events' %}">
+            📅 Events
+        </a>
+
+        <a href="{% url 'add_event' %}">
+            ➕ Add Event
+        </a>
+
+        <a class="active" href="{% url 'participants' %}">
+            👥 Participants
+        </a>
+
+        <a href="{% url 'analytics' %}">
+            📊 Analytics
+        </a>
+
+        <a href="{% url 'notifications' %}">
+            🔔 Notifications
+        </a>
+
+        <a href="{% url 'settings' %}">
+            ⚙️ Settings
+        </a>
+
+    </nav>
+
+    <div class="logout">
+        🚪 Logout
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div>
+            <h1>Participants</h1>
+            <p>View students registered for college events.</p>
+        </div>
+
+        <a class="primary-button" href="{% url 'events' %}">
+            📅 View Events
+        </a>
+
+    </header>
+
+
+    <section class="events-section">
+
+        <div class="section-header">
+            <h2>Registered Students</h2>
+        </div>
+
+
+        {% if registrations %}
+
+            {% for registration in registrations %}
+
+            <div class="event">
+
+                <div class="event-date">
+                    <strong>{{ forloop.counter }}</strong>
+                    <span>STUDENT</span>
+                </div>
+
+
+                <div class="event-info">
+
+                    <h3>
+                        {{ registration.student_name }}
+                    </h3>
+
+                    <p>
+                        📧 {{ registration.student_email }}
+                    </p>
+
+                    <p>
+                        📱 {{ registration.student_phone }}
+                    </p>
+
+                    <p>
+                        🎓 Event: {{ registration.event.name }}
+                    </p>
+
+                    <p>
+                        🕒 Registered:
+                        {{ registration.registered_at|date:"d M Y, g:i A" }}
+                    </p>
+
+                </div>
+
+                <span class="status">
+                    Registered
+                </span>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <h3>No participants yet</h3>
+
+                <p>
+                    Students who register for events will appear here.
+                </p>
+
+                <br>
+
+                <a class="primary-button" href="{% url 'events' %}">
+                    📅 View Events
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+
+</html>
+```

@@ -64,10 +64,7 @@
 
             <div>
                 <h1>College Events</h1>
-
-                <p>
-                    View and manage all college events.
-                </p>
+                <p>View and manage all college events.</p>
             </div>
 
             <a class="primary-button" href="{% url 'add_event' %}">
@@ -87,39 +84,23 @@
                     Upcoming
                 </span>
 
-                <h2>
-                    {{ event.name }}
-                </h2>
+                <h2>{{ event.name }}</h2>
 
-                <p>
-                    {{ event.description }}
-                </p>
-
+                <p>{{ event.description }}</p>
 
                 <div class="details">
 
-                    <p>
-                        📅 {{ event.date|date:"d M Y" }}
-                    </p>
+                    <p>📅 {{ event.date|date:"d M Y" }}</p>
 
-                    <p>
-                        ⏰ {{ event.time|time:"g:i A" }}
-                    </p>
+                    <p>⏰ {{ event.time|time:"g:i A" }}</p>
 
-                    <p>
-                        📍 {{ event.venue }}
-                    </p>
+                    <p>📍 {{ event.venue }}</p>
 
-                    <p>
-                        👤 {{ event.organizer }}
-                    </p>
+                    <p>👤 {{ event.organizer }}</p>
 
-                    <p>
-                        👥 Up to {{ event.max_participants }} participants
-                    </p>
+                    <p>👥 Up to {{ event.max_participants }} participants</p>
 
                 </div>
-
 
                 <br>
 
@@ -139,13 +120,9 @@
 
             <div class="empty-card">
 
-                <h2>
-                    No events available
-                </h2>
+                <h2>No events available</h2>
 
-                <p>
-                    Create your first college event.
-                </p>
+                <p>Create your first college event.</p>
 
                 <br>
 

@@ -16,3 +16,98 @@ body{font-family:Arial,sans-serif;background:#f5f6fa;color:#333}
 .form-card{max-width:800px;margin:auto}.form-card h1{margin-bottom:5px}.form-card form{margin-top:25px}.form-card p{margin-bottom:18px}.form-card label{display:block;font-weight:bold;margin-bottom:7px}.form-card input,.form-card textarea,.form-card select{width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;font-size:15px}.form-card textarea{min-height:120px;resize:vertical}.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:25px}.secondary-button{display:inline-block;text-decoration:none;background:#e5e7eb;color:#333;padding:10px 15px;border-radius:7px}
 @media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.content-grid,.event-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.sidebar{width:70px}.logo{font-size:0}.main{margin-left:70px;padding:15px}.cards{grid-template-columns:1fr}.menu a{font-size:0}}
+
+/* ===== Modern Dashboard Enhancements ===== */
+
+body {
+    background: #f8fafc;
+}
+
+.sidebar {
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    letter-spacing: 0.3px;
+}
+
+.menu a {
+    transition: all 0.2s ease;
+}
+
+.menu a:hover {
+    transform: translateX(3px);
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+}
+
+.small-button,
+.primary-button {
+    transition: all 0.2s ease;
+}
+
+.small-button:hover,
+.primary-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(59, 130, 246, 0.25);
+}
+
+.events-section,
+.quick-actions,
+.form-card,
+.event-card {
+    border: 1px solid #eef0f4;
+}
+
+.event {
+    transition: background 0.2s ease;
+}
+
+.event:hover {
+    background: #f8fafc;
+}
+
+.action-button {
+    transition: all 0.2s ease;
+}
+
+.action-button:hover {
+    transform: translateX(3px);
+}
+
+.profile {
+    font-weight: 500;
+}
+
+/* Better mobile layout */
+@media (max-width: 600px) {
+    .topbar {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .topbar h1 {
+        font-size: 24px;
+    }
+
+    .profile {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .event {
+        gap: 12px;
+    }
+
+    .event-date {
+        width: 50px;
+        height: 50px;
+    }
+}

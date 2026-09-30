@@ -1,0 +1,186 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings - CampusEvents</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="logo">
+        🎓 CampusEvents
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="{% url 'dashboard' %}">
+                🏠 Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'events' %}">
+                📅 Events
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'add_event' %}">
+                ➕ Add Event
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'participants' %}">
+                👥 Participants
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'analytics' %}">
+                📊 Analytics
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'notifications' %}">
+                🔔 Notifications
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'settings' %}" class="active">
+                ⚙️ Settings
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="logout">
+        <a href="#">
+            🚪 Logout
+        </a>
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Settings</h1>
+            <p>Manage your CampusEvents settings.</p>
+        </div>
+
+        <div class="profile">
+            👤 Admin
+        </div>
+
+    </div>
+
+
+    <!-- SETTINGS -->
+    <div class="form-card">
+
+        <h1>Account Settings</h1>
+
+        <p class="subtitle">
+            Manage your account and application preferences.
+        </p>
+
+        <form>
+
+            <p>
+                <label for="name">
+                    Admin Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    value="Admin"
+                >
+            </p>
+
+
+            <p>
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="admin@example.com"
+                >
+            </p>
+
+
+            <p>
+                <label for="notifications">
+                    Notification Preference
+                </label>
+
+                <select id="notifications">
+
+                    <option>
+                        All Notifications
+                    </option>
+
+                    <option>
+                        Event Notifications Only
+                    </option>
+
+                    <option>
+                        Registration Notifications Only
+                    </option>
+
+                    <option>
+                        Disable Notifications
+                    </option>
+
+                </select>
+
+            </p>
+
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="secondary-button"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                >
+                    Save Settings
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>

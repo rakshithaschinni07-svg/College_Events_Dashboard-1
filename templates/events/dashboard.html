@@ -1,0 +1,708 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>CampusEvents Dashboard</title>
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<style>
+    .dashboard-navigation {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .dashboard-navigation button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #eeeeee;
+        font-size: 15px;
+    }
+
+    .dashboard-navigation button:hover {
+        background: #dddddd;
+    }
+
+    .dashboard-navigation button.active {
+        background: #333333;
+        color: white;
+    }
+
+    .dashboard-section {
+        display: none;
+    }
+
+    .dashboard-section.active {
+        display: block;
+    }
+
+    .info-card {
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        background: #f5f5f5;
+    }
+
+    .settings-row {
+        margin: 15px 0;
+    }
+
+    .notification-card {
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background: #f5f5f5;
+    }
+
+    .form-group {
+        margin: 15px 0;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .action-button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #333333;
+        color: white;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+```
+<!-- HEADER -->
+
+<header class="dashboard-header">
+
+    <h1>🎓 CampusEvents</h1>
+
+    <p>Manage and explore college events</p>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav class="dashboard-navigation">
+
+    <button
+        class="nav-button active"
+        onclick="showSection('dashboard', this)">
+        🏠 Dashboard
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showSection('events', this)">
+        📅 Events
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showSection('add-event', this)">
+        ➕ Add Event
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showSection('participants', this)">
+        👥 Participants
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showSection('analytics', this)">
+        📊 Analytics
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showSection('notifications', this)">
+        🔔 Notifications
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showSection('settings', this)">
+        ⚙️ Settings
+    </button>
+
+</nav>
+
+
+<!-- ================================================= -->
+<!-- DASHBOARD -->
+<!-- ================================================= -->
+
+<section id="dashboard" class="dashboard-section active">
+
+    <h2>Dashboard</h2>
+
+    <p>Manage your college events in one place.</p>
+
+
+    <section class="summary">
+
+        <div class="summary-card">
+
+            <h2>📅 Total Events</h2>
+
+            <p>{{ events|length }}</p>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <h2>🎯 Upcoming Events</h2>
+
+            <p>{{ events|length }}</p>
+
+        </div>
+
+    </section>
+
+
+    <h2>Upcoming Events</h2>
+
+    {% for event in events %}
+
+    <div class="event-card">
+
+        <h2>{{ event.name }}</h2>
+
+        <p>{{ event.description }}</p>
+
+        <p>
+            <strong>📅 Date:</strong>
+            {{ event.date }}
+        </p>
+
+        <p>
+            <strong>⏰ Time:</strong>
+            {{ event.time }}
+        </p>
+
+        <p>
+            <strong>📍 Venue:</strong>
+            {{ event.venue }}
+        </p>
+
+        <p>
+            <strong>Organizer:</strong>
+            {{ event.organizer }}
+        </p>
+
+        <p>
+            <strong>Maximum Participants:</strong>
+            {{ event.max_participants }}
+        </p>
+
+    </div>
+
+    {% empty %}
+
+    <p>No upcoming events.</p>
+
+    {% endfor %}
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- EVENTS -->
+<!-- ================================================= -->
+
+<section id="events" class="dashboard-section">
+
+    <h2>📅 Events</h2>
+
+    <p>All college events.</p>
+
+    {% for event in events %}
+
+    <div class="event-card">
+
+        <h2>{{ event.name }}</h2>
+
+        <p>{{ event.description }}</p>
+
+        <p>
+            <strong>📅 Date:</strong>
+            {{ event.date }}
+        </p>
+
+        <p>
+            <strong>⏰ Time:</strong>
+            {{ event.time }}
+        </p>
+
+        <p>
+            <strong>📍 Venue:</strong>
+            {{ event.venue }}
+        </p>
+
+        <p>
+            <strong>Organizer:</strong>
+            {{ event.organizer }}
+        </p>
+
+    </div>
+
+    {% empty %}
+
+    <p>No events available.</p>
+
+    {% endfor %}
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- ADD EVENT -->
+<!-- ================================================= -->
+
+<section id="add-event" class="dashboard-section">
+
+    <h2>➕ Add Event</h2>
+
+    <div class="info-card">
+
+        <p>Create a new college event.</p>
+
+
+        <div class="form-group">
+
+            <label>Event Name</label>
+
+            <input
+                type="text"
+                id="newEventName"
+                placeholder="Enter event name">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Description</label>
+
+            <textarea
+                id="newEventDescription"
+                rows="4"
+                placeholder="Enter event description"></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Date</label>
+
+            <input
+                type="date"
+                id="newEventDate">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Time</label>
+
+            <input
+                type="time"
+                id="newEventTime">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Venue</label>
+
+            <input
+                type="text"
+                id="newEventVenue"
+                placeholder="Enter venue">
+
+        </div>
+
+
+        <button
+            type="button"
+            class="action-button"
+            onclick="createEvent()">
+
+            Create Event
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- PARTICIPANTS -->
+<!-- ================================================= -->
+
+<section id="participants" class="dashboard-section">
+
+    <h2>👥 Participants</h2>
+
+    <div class="info-card">
+
+        <h3>Student Participants</h3>
+
+        <p>
+            Total Students:
+            <strong>450</strong>
+        </p>
+
+        <p>
+            Total Registrations:
+            <strong>320</strong>
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h3>Recent Participants</h3>
+
+        <p>Rahul Kumar — AI Workshop</p>
+
+        <p>Ananya Sharma — Tech Expo 2026</p>
+
+        <p>Arjun Kumar — AI Workshop</p>
+
+        <p>Priya Singh — Tech Expo 2026</p>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- ANALYTICS -->
+<!-- ================================================= -->
+
+<section id="analytics" class="dashboard-section">
+
+    <h2>📊 Analytics</h2>
+
+    <div class="info-card">
+
+        <h3>Event Statistics</h3>
+
+        <p>
+            Total Events:
+            <strong>{{ events|length }}</strong>
+        </p>
+
+        <p>
+            Total Students:
+            <strong>450</strong>
+        </p>
+
+        <p>
+            Total Registrations:
+            <strong>320</strong>
+        </p>
+
+        <p>
+            Upcoming Events:
+            <strong>{{ events|length }}</strong>
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h3>Registration Overview</h3>
+
+        <p>
+            Students are actively registering for upcoming
+            college events.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- NOTIFICATIONS -->
+<!-- ================================================= -->
+
+<section id="notifications" class="dashboard-section">
+
+    <h2>🔔 Notifications</h2>
+
+    <p>
+        View important updates about college events.
+    </p>
+
+
+    <div class="notification-card">
+
+        <strong>New Event Available</strong>
+
+        <p>
+            AI Workshop is available for student registration.
+        </p>
+
+        <small>New</small>
+
+    </div>
+
+
+    <div class="notification-card">
+
+        <strong>Tech Expo 2026</strong>
+
+        <p>
+            Tech Expo 2026 is scheduled for 20 Oct 2026.
+        </p>
+
+        <small>Upcoming</small>
+
+    </div>
+
+
+    <div class="notification-card">
+
+        <strong>Registration Update</strong>
+
+        <p>
+            Students can register for available college events.
+        </p>
+
+        <small>Active</small>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- SETTINGS -->
+<!-- ================================================= -->
+
+<section id="settings" class="dashboard-section">
+
+    <h2>⚙️ Settings</h2>
+
+    <div class="info-card">
+
+        <h3>Application Settings</h3>
+
+        <p>
+            Configure basic preferences for CampusEvents.
+        </p>
+
+
+        <div class="settings-row">
+
+            <label>
+                <strong>Application Name</strong>
+            </label>
+
+            <br>
+
+            <input
+                type="text"
+                value="CampusEvents">
+
+        </div>
+
+
+        <div class="settings-row">
+
+            <label>
+                <strong>Administrator Email</strong>
+            </label>
+
+            <br>
+
+            <input
+                type="email"
+                placeholder="admin@example.com">
+
+        </div>
+
+
+        <div class="settings-row">
+
+            <strong>Notifications</strong>
+
+            <br>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="notifications"
+                    checked>
+
+                Enabled
+
+            </label>
+
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="notifications">
+
+                Disabled
+
+            </label>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="action-button"
+            onclick="saveSettings()">
+
+            Save Settings
+
+        </button>
+
+    </div>
+
+</section>
+```
+
+</div>
+
+<!-- ================================================= -->
+
+<!-- JAVASCRIPT -->
+
+<!-- ================================================= -->
+
+<script>
+
+function showSection(sectionId, clickedButton) {
+
+    // Hide every section
+
+    const sections =
+        document.querySelectorAll(".dashboard-section");
+
+    sections.forEach(function(section) {
+
+        section.classList.remove("active");
+
+    });
+
+
+    // Remove active state from all buttons
+
+    const buttons =
+        document.querySelectorAll(".nav-button");
+
+    buttons.forEach(function(button) {
+
+        button.classList.remove("active");
+
+    });
+
+
+    // Show selected section
+
+    const selectedSection =
+        document.getElementById(sectionId);
+
+    if (selectedSection) {
+
+        selectedSection.classList.add("active");
+
+    }
+
+
+    // Highlight selected button
+
+    if (clickedButton) {
+
+        clickedButton.classList.add("active");
+
+    }
+
+}
+
+
+function createEvent() {
+
+    const name =
+        document.getElementById("newEventName").value;
+
+    if (name.trim() === "") {
+
+        alert("Please enter the event name.");
+
+        return;
+
+    }
+
+    alert(
+        "Event form submitted successfully.\n\n" +
+        "Event: " + name
+    );
+
+}
+
+
+function saveSettings() {
+
+    alert("Settings saved successfully.");
+
+}
+
+</script>
+
+</body>
+
+</html>
+
+
+

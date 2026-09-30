@@ -1,0 +1,289 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics - CampusEvents</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="logo">
+        🎓 CampusEvents
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="{% url 'dashboard' %}">
+                🏠 Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'events' %}">
+                📅 Events
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'add_event' %}">
+                ➕ Add Event
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                👥 Participants
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'analytics' %}" class="active">
+                📊 Analytics
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                🔔 Notifications
+            </a>
+        </li>
+
+        <li>
+            <li> 
+                <a href="{% url 'settings' %}"> 
+                    ⚙️ Settings 
+                </a> 
+</li>
+        </li>
+
+    </ul>
+
+    <div class="logout">
+        <a href="#">
+            🚪 Logout
+        </a>
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+
+        <div>
+            <h1>Analytics</h1>
+            <p>View statistics and registration details for your college events.</p>
+        </div>
+
+        <div class="profile">
+            👤 Admin
+        </div>
+
+    </div>
+
+
+    <!-- STATISTICS CARDS -->
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-icon">
+                📅
+            </div>
+
+            <div>
+                <h3>Total Events</h3>
+                <h2>{{ total_events }}</h2>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                👥
+            </div>
+
+            <div>
+                <h3>Total Registrations</h3>
+                <h2>{{ total_registrations }}</h2>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎯
+            </div>
+
+            <div>
+                <h3>Upcoming Events</h3>
+                <h2>{{ total_events }}</h2>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📊
+            </div>
+
+            <div>
+                <h3>Event Records</h3>
+                <h2>{{ event_data|length }}</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ANALYTICS CONTENT -->
+    <div class="content-grid">
+
+        <!-- EVENT ANALYTICS -->
+        <section class="events-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Event Analytics</h2>
+                    <p class="subtitle">
+                        Registration and available slot information
+                    </p>
+                </div>
+
+                <a href="{% url 'events' %}" class="small-button">
+                    View Events
+                </a>
+
+            </div>
+
+
+            {% if event_data %}
+
+                {% for item in event_data %}
+
+                <div class="event">
+
+                    <!-- EVENT DATE -->
+                    <div class="event-date">
+
+                        <strong>
+                            {{ item.event.date|date:"d" }}
+                        </strong>
+
+                        <span>
+                            {{ item.event.date|date:"M" }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- EVENT INFORMATION -->
+                    <div class="event-info">
+
+                        <h3>
+                            {{ item.event.name }}
+                        </h3>
+
+                        <p>
+                            📍 {{ item.event.location }}
+                        </p>
+
+                        <p>
+                            👥 {{ item.registration_count }} registrations
+                        </p>
+
+                        <p>
+                            🎯 {{ item.available_slots }} available slots
+                        </p>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+                    <div>
+
+                        {% if item.available_slots > 0 %}
+
+                            <span class="status">
+                                Available
+                            </span>
+
+                        {% else %}
+
+                            <span class="status">
+                                Full
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty">
+                    No event analytics available.
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="quick-actions">
+
+            <h2>Quick Actions</h2>
+
+            <a href="{% url 'add_event' %}" class="action-button">
+                ➕ Create Event
+            </a>
+
+            <a href="{% url 'events' %}" class="action-button">
+                📅 View Events
+            </a>
+
+            <a href="#" class="action-button">
+                👥 View Participants
+            </a>
+
+            <a href="{% url 'analytics' %}" class="action-button">
+                📊 View Analytics
+            </a>
+
+            <a href="#" class="action-button">
+                🔔 Notifications
+            </a>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+</html>
