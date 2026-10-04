@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-college-events-demo-key"
 DEBUG = True
-ALLOWED_HOSTS = ['college-events-dashboard-1-1.onrender.com']
+ALLOWED_HOSTS = ['college-events-dashboard-1-2.onrender.com']
 
 INSTALLED_APPS = [
     "django.contrib.admin",
